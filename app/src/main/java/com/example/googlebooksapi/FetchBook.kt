@@ -70,23 +70,7 @@ class FetchBook(
             reader.forEachLine {
                 builder.append(it + "\n");
                 Log.d("linha", it)
-            }/*
-            while ((reader.readLine()!=null)) {
-                // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
-                // but it does make debugging a *lot* easier if you print out the completed buffer for debugging.
-
-
-                if(reader.readLine() != null){
-                    line = reader.readLine()
-                    builder.append(line + "\n");
-                    Log.d("linha", line)
-                }
-                else{
-                    break;
-                }
-
             }
-            */
             if (builder.length == 0) {
                 // Stream was empty.  No point in parsing.
                 // return null;
@@ -159,34 +143,16 @@ class FetchBook(
                 try {
                     id = book.getString("id")
                     title = volumeInfo.getString("title")
-                    //Log.d("entrouuuuuu5555555",title)
                     authors = volumeInfo.getString("authors")
-                    //Log.d("entrouuuuuu5555555",authors)
                     thumbnail = volumeInfo.getJSONObject("imageLinks").getString("thumbnail")
-                    //Log.d("entrouuuuuu5555555",thumbnail)
                     publisher = volumeInfo.getString("publisher")
-                    //Log.d("entrouuuuuu5555555",publisher)
                     publisherDate = volumeInfo.getString("publishedDate")
-                    //Log.d("entrouuuuuu5555555",publisherDate)
                     pageCount = volumeInfo.getInt("pageCount")
-                    //Log.d("entrouuuuuu5555555",pageCount.toString())
                     language = volumeInfo.getString("language")
-                    //Log.d("entrouuuuuu5555555",language)
 
 
                     thumbnail=thumbnail.replace("http:","https:")
 
-
-
-                    Log.d("entrouuuuuu5555555","---------")
-                    /*
-                    Log.d("entrouuuuuu5555555",title)
-                    Log.d("entrouuuuuu5555555",authors)
-                    Log.d("entrouuuuuu5555555",thumbnail)
-                    Log.d("entrouuuuuu5555555",publisher)
-                    Log.d("entrouuuuuu5555555",publisherDate)
-                    Log.d("entrouuuuuu5555555","---------")
-                    */
                     if (title != null ) {
                         mBookInput.setText("")
                         val book = Book(id,authors,title,thumbnail,publisher,publisherDate,pageCount,language)
@@ -197,16 +163,14 @@ class FetchBook(
                     e.printStackTrace()
                 }
 
-                // Move to the next item.
+
 
             }
             activity.mAdapterBooks.notifyDataSetChanged()
 
-            // If both are found, display the result.
+
 
         } catch (e: Exception) {
-            // If onPostExecute does not receive a proper JSON string,
-            // update the UI to show failed results.
 
             e.printStackTrace()
         }

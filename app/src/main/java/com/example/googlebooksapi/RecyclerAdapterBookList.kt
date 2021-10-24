@@ -110,9 +110,6 @@ class RecyclerAdapterBookList(
 
                 tinydb.putListString(books[position].id.toString(), favBookTemp);
 
-                for(bookID in favBooksIds){
-                    Log.d("entrounatiny",tinydb.getListString(bookID).toString())
-                }
             })
         builder.setNegativeButton("Close",
             DialogInterface.OnClickListener { dialog, which ->
